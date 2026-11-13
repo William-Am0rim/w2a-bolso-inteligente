@@ -5,7 +5,6 @@ import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { toast } from "sonner";
 import { ArrowRight, ArrowUpRight, CheckCircle2, Eye, EyeOff, Loader2, LockKeyhole, Mail, ShieldCheck, UserRound } from "lucide-react";
-import logoAsset from "@/assets/sr-strix-logo.png.asset.json";
 import owlAsset from "@/assets/sr-strix-owl.png.asset.json";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
@@ -57,7 +56,7 @@ function AuthPage() {
     media.add("(prefers-reduced-motion: no-preference)", () => {
       const ctx = gsap.context(() => {
         gsap.from(".auth-reveal", { y: 22, opacity: 0, duration: 0.8, stagger: 0.1, ease: "power3.out" });
-        gsap.to(".strix-orbit", { rotation: 360, duration: 100, repeat: -1, ease: "none" });
+        gsap.to(".strix-orbit", { rotation: 360, duration: 18, repeat: -1, ease: "none" });
         gsap.to(".strix-owl", { y: -10, duration: 3, repeat: -1, yoyo: true, ease: "sine.inOut" });
       }, pageRef);
       return () => ctx.revert();
@@ -128,7 +127,7 @@ function AuthPage() {
         <div className="auth-art-bottom auth-reveal"><span>Seu próximo capítulo começa aqui.</span><span>01 — 03</span></div>
       </section>
       <main className="auth-main">
-        <header className="auth-main-header auth-reveal"><img src={logoAsset.url} alt="Sr. Strix Finanças" /><span><ShieldCheck size={14} aria-hidden /> ACESSO SEGURO</span></header>
+        <header className="auth-main-header auth-reveal"><span className="auth-wordmark">Sr. <b>Strix</b></span><span><ShieldCheck size={14} aria-hidden /> ACESSO SEGURO</span></header>
         <div className="auth-form-wrap auth-reveal">
           <span className="auth-eyebrow">SUAS FINANÇAS. SEU FUTURO.</span>
           <h1>{sent ? "Confira seu e-mail" : mode === "login" ? "Bom ter você de volta." : mode === "signup" ? "Seu futuro começa agora." : "Vamos recuperar seu acesso."}</h1>
