@@ -12,7 +12,7 @@ import { errMsg, useRefresh, type FinanceData, type Goal } from "@/lib/data";
 import { formatDate, parseBRL, pct, todayBR } from "@/lib/finance";
 
 export const Route = createFileRoute("/_authenticated/metas")({
-  head: () => ({ meta: [{ title: "Metas — W2A Finanças" }, { name: "description", content: "Acompanhe seus objetivos financeiros." }] }),
+  head: () => ({ meta: [{ title: "Metas — Sr. Strix Finanças" }, { name: "description", content: "Acompanhe seus objetivos financeiros." }, { property: "og:title", content: "Metas — Sr. Strix Finanças" }, { property: "og:description", content: "Acompanhe seus objetivos financeiros." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
   component: () => <WithData>{(d) => <Metas d={d} />}</WithData>,
 });
 

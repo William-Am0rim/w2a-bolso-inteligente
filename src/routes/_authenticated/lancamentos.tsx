@@ -32,7 +32,7 @@ const search = z.object({
 
 export const Route = createFileRoute("/_authenticated/lancamentos")({
   validateSearch: zodValidator(search),
-  head: () => ({ meta: [{ title: "Lançamentos — W2A Finanças" }, { name: "description", content: "Receitas, despesas e compras no cartão." }] }),
+  head: () => ({ meta: [{ title: "Lançamentos — Sr. Strix Finanças" }, { name: "description", content: "Receitas, despesas e compras no cartão." }, { property: "og:title", content: "Lançamentos — Sr. Strix Finanças" }, { property: "og:description", content: "Receitas, despesas e compras no cartão." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
   component: () => <WithData>{(d) => <Lancamentos d={d} />}</WithData>,
 });
 

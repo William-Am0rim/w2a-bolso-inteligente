@@ -17,7 +17,7 @@ const search = z.object({ month: fallback(z.string(), "").default("") });
 
 export const Route = createFileRoute("/_authenticated/orcamentos")({
   validateSearch: zodValidator(search),
-  head: () => ({ meta: [{ title: "Orçamentos — W2A Finanças" }, { name: "description", content: "Limites mensais por categoria." }] }),
+  head: () => ({ meta: [{ title: "Orçamentos — Sr. Strix Finanças" }, { name: "description", content: "Limites mensais por categoria." }, { property: "og:title", content: "Orçamentos — Sr. Strix Finanças" }, { property: "og:description", content: "Limites mensais por categoria." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
   component: () => <WithData>{(d) => <Orcamentos d={d} />}</WithData>,
 });
 

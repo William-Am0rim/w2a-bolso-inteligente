@@ -19,7 +19,7 @@ const search = z.object({ card: fallback(z.string(), "").default(""), invoice: f
 
 export const Route = createFileRoute("/_authenticated/cartoes")({
   validateSearch: zodValidator(search),
-  head: () => ({ meta: [{ title: "Cartões — W2A Finanças" }, { name: "description", content: "Cartões de crédito, faturas e parcelas." }] }),
+  head: () => ({ meta: [{ title: "Cartões — Sr. Strix Finanças" }, { name: "description", content: "Cartões de crédito, faturas e parcelas." }, { property: "og:title", content: "Cartões — Sr. Strix Finanças" }, { property: "og:description", content: "Cartões de crédito, faturas e parcelas." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
   component: () => <WithData>{(d) => <Cartoes d={d} />}</WithData>,
 });
 

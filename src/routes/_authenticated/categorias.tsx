@@ -16,7 +16,7 @@ const search = z.object({ tipo: fallback(z.string(), "expense").default("expense
 
 export const Route = createFileRoute("/_authenticated/categorias")({
   validateSearch: zodValidator(search),
-  head: () => ({ meta: [{ title: "Categorias — W2A Finanças" }, { name: "description", content: "Categorias de receitas e despesas." }] }),
+  head: () => ({ meta: [{ title: "Categorias — Sr. Strix Finanças" }, { name: "description", content: "Categorias de receitas e despesas." }, { property: "og:title", content: "Categorias — Sr. Strix Finanças" }, { property: "og:description", content: "Categorias de receitas e despesas." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
   component: () => <WithData>{(d) => <Categorias d={d} />}</WithData>,
 });
 

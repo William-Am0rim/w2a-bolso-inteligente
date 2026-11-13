@@ -1,14 +1,17 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { zodValidator, fallback } from "@tanstack/zod-adapter";
 import { z } from "zod";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { gsap } from "gsap";
 import { toast } from "sonner";
-import { Wallet } from "lucide-react";
+import { ArrowRight, ArrowUpRight, CheckCircle2, Eye, EyeOff, Loader2, LockKeyhole, Mail, ShieldCheck, UserRound } from "lucide-react";
+import logoAsset from "@/assets/sr-strix-logo.png.asset.json";
+import owlAsset from "@/assets/sr-strix-owl.png.asset.json";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const search = z.object({ redirect: fallback(z.string(), "").default("") });
 
@@ -16,10 +19,12 @@ export const Route = createFileRoute("/auth")({
   validateSearch: zodValidator(search),
   head: () => ({
     meta: [
-      { title: "Entrar — W2A Finanças" },
-      { name: "description", content: "Acesse ou crie sua conta no W2A Finanças." },
-      { property: "og:title", content: "Entrar — W2A Finanças" },
-      { property: "og:description", content: "Acesse ou crie sua conta no W2A Finanças." },
+      { title: "Entrar ou criar conta — Sr. Strix Finanças" },
+      { name: "description", content: "Acesse ou crie sua conta no Sr. Strix Finanças." },
+      { property: "og:title", content: "Entrar ou criar conta — Sr. Strix Finanças" },
+      { property: "og:description", content: "Acesse ou crie sua conta no Sr. Strix Finanças." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: AuthPage,
@@ -45,6 +50,25 @@ function AuthPage() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [busy, setBusy] = useState(false);
   const [sent, setSent] = useState<string | null>(null);
+  const [showPassword, setShowPassword] = useState(false);
+  const pageRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const media = gsap.matchMedia();
+    media.add("(prefers-reduced-motion: no-preference)", () => {
+      const ctx = gsap.context(() => {
+        gsap.from(".auth-reveal", { y: 22, opacity: 0, duration: 0.8, stagger: 0.1, ease: "power3.out" });
+        gsap.to(".strix-orbit", { rotation: 360, duration: 100, repeat: -1, ease: "none" });
+        gsap.to(".strix-owl", { y: -10, duration: 3, repeat: -1, yoyo: true, ease: "sine.inOut" });
+      }, pageRef);
+      return () => ctx.revert();
+    });
+    return () => media.revert();
+  }, []);
+
+  function changeMode(next: "login" | "signup" | "forgot") {
+    setMode(next); setErrors({}); setSent(null); setShowPassword(false);
+  }
 
   function validate() {
     const e: Record<string, string> = {};
@@ -90,71 +114,80 @@ function AuthPage() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background p-4">
-      <div className="w-full max-w-md rounded-2xl border bg-card p-6 shadow-sm sm:p-8">
-        <div className="mb-6 flex items-center gap-3">
-          <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary text-primary-foreground">
-            <Wallet className="h-6 w-6" aria-hidden />
-          </div>
-          <div>
-            <h1 className="text-xl font-semibold">W2A Finanças</h1>
-            <p className="text-sm text-muted-foreground">Suas finanças organizadas, todos os dias.</p>
-          </div>
+    <div ref={pageRef} className="strix-auth">
+      <section className="auth-art" aria-label="Sr. Strix Finanças">
+        <div className="auth-art-top auth-reveal"><span>SR. STRIX / FINANÇAS</span><ArrowUpRight size={18} aria-hidden /></div>
+        <div className="auth-brand-scene">
+          <div className="strix-orbit" aria-hidden><span /><span /><span /></div>
+          <img src={owlAsset.url} alt="" className="strix-owl" />
         </div>
+        <div className="auth-art-copy auth-reveal">
+          <span className="auth-eyebrow">UM NOVO OLHAR PARA O SEU DINHEIRO</span>
+          <h2>Mais clareza.<br />Mais <span>possibilidades.</span></h2>
+          <p>Equilíbrio hoje. Liberdade para o amanhã.</p>
+        </div>
+        <div className="auth-art-bottom auth-reveal"><span>Seu próximo capítulo começa aqui.</span><span>01 — 03</span></div>
+      </section>
+      <main className="auth-main">
+        <header className="auth-main-header auth-reveal"><img src={logoAsset.url} alt="Sr. Strix Finanças" /><span><ShieldCheck size={14} aria-hidden /> ACESSO SEGURO</span></header>
+        <div className="auth-form-wrap auth-reveal">
+          <span className="auth-eyebrow">SUAS FINANÇAS. SEU FUTURO.</span>
+          <h1>{sent ? "Confira seu e-mail" : mode === "login" ? "Bom ter você de volta." : mode === "signup" ? "Seu futuro começa agora." : "Vamos recuperar seu acesso."}</h1>
+          <p className="auth-intro">{sent ? "Falta só mais um passo para continuar." : mode === "login" ? "Entre na sua conta e siga em frente." : mode === "signup" ? "Crie sua conta e dê o primeiro passo." : "Informe o e-mail associado à sua conta."}</p>
         {sent ? (
           <div className="space-y-4">
-            <p className="rounded-lg bg-success-soft p-4 text-sm" role="status">{sent}</p>
-            <Button variant="outline" className="w-full" onClick={() => { setSent(null); setMode("login"); }}>
+            <p className="auth-sent" role="status"><CheckCircle2 size={22} aria-hidden />{sent}</p>
+            <Button variant="outline" className="w-full auth-secondary" onClick={() => changeMode("login")}>
               Voltar para o login
             </Button>
           </div>
         ) : (
           <>
             {mode !== "forgot" && (
-              <Tabs value={mode} onValueChange={(v) => { setMode(v as "login"); setErrors({}); }} className="mb-4">
-                <TabsList className="grid w-full grid-cols-2">
+              <Tabs value={mode} onValueChange={(v) => changeMode(v === "signup" ? "signup" : "login")} className="mb-7">
+                <TabsList className="auth-tabs grid w-full grid-cols-2">
                   <TabsTrigger value="login">Entrar</TabsTrigger>
                   <TabsTrigger value="signup">Criar conta</TabsTrigger>
                 </TabsList>
-                <TabsContent value="login" />
-                <TabsContent value="signup" />
               </Tabs>
             )}
-            {mode === "forgot" && <h2 className="mb-4 font-semibold">Recuperar senha</h2>}
-            <form onSubmit={submit} className="space-y-4" noValidate>
+            <form onSubmit={submit} className="space-y-5" noValidate>
               {mode === "signup" && (
                 <div className="space-y-1.5">
                   <Label htmlFor="name">Nome</Label>
-                  <Input id="name" value={name} onChange={(e) => setName(e.target.value)} aria-invalid={!!errors.name} autoComplete="name" />
-                  {errors.name && <p className="text-sm text-destructive">{errors.name}</p>}
+                  <div className="auth-input-wrap"><UserRound size={18} aria-hidden /><Input id="name" placeholder="Como podemos chamar você?" value={name} onChange={(e) => setName(e.target.value)} aria-invalid={!!errors.name} aria-describedby={errors.name ? "name-error" : undefined} autoComplete="name" disabled={busy} /></div>
+                  {errors.name && <p id="name-error" className="text-sm text-destructive">{errors.name}</p>}
                 </div>
               )}
               <div className="space-y-1.5">
                 <Label htmlFor="email">E-mail</Label>
-                <Input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} aria-invalid={!!errors.email} autoComplete="email" />
-                {errors.email && <p className="text-sm text-destructive">{errors.email}</p>}
+                <div className="auth-input-wrap"><Mail size={18} aria-hidden /><Input id="email" type="email" placeholder="voce@exemplo.com" value={email} onChange={(e) => setEmail(e.target.value)} aria-invalid={!!errors.email} aria-describedby={errors.email ? "email-error" : undefined} autoComplete="email" disabled={busy} /></div>
+                {errors.email && <p id="email-error" className="text-sm text-destructive">{errors.email}</p>}
               </div>
               {mode !== "forgot" && (
                 <div className="space-y-1.5">
-                  <Label htmlFor="password">Senha</Label>
-                  <Input id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} aria-invalid={!!errors.password} autoComplete={mode === "login" ? "current-password" : "new-password"} />
-                  {errors.password && <p className="text-sm text-destructive">{errors.password}</p>}
+                  <div className="flex items-center justify-between gap-2"><Label htmlFor="password">Senha</Label>{mode === "login" && <Button type="button" variant="link" className="auth-link h-auto p-0 text-xs" onClick={() => changeMode("forgot")} disabled={busy}>Esqueceu a senha?</Button>}</div>
+                  <div className="auth-input-wrap"><LockKeyhole size={18} aria-hidden /><Input id="password" type={showPassword ? "text" : "password"} placeholder={mode === "signup" ? "Pelo menos 6 caracteres" : "Sua senha"} value={password} onChange={(e) => setPassword(e.target.value)} aria-invalid={!!errors.password} aria-describedby={errors.password ? "password-error" : undefined} autoComplete={mode === "login" ? "current-password" : "new-password"} disabled={busy} /><Button type="button" variant="ghost" size="icon" className="auth-eye" aria-label={showPassword ? "Ocultar senha" : "Mostrar senha"} title={showPassword ? "Ocultar senha" : "Mostrar senha"} onClick={() => setShowPassword(!showPassword)}>{showPassword ? <EyeOff size={18} /> : <Eye size={18} />}</Button></div>
+                  {errors.password && <p id="password-error" className="text-sm text-destructive">{errors.password}</p>}
                 </div>
               )}
-              <Button type="submit" className="w-full" disabled={busy}>
+              <Button type="submit" className="auth-submit w-full" disabled={busy}>
                 {busy ? "Aguarde..." : mode === "login" ? "Entrar" : mode === "signup" ? "Criar conta" : "Enviar link"}
+                {busy ? <Loader2 size={18} className="animate-spin" aria-hidden /> : <ArrowRight size={18} aria-hidden />}
               </Button>
             </form>
-            <div className="mt-4 text-center text-sm">
+            <div className="auth-switch">
               {mode === "forgot" ? (
-                <button className="text-primary underline-offset-4 hover:underline" onClick={() => setMode("login")}>Voltar para o login</button>
+                <Button variant="link" className="auth-link" onClick={() => changeMode("login")} disabled={busy}>Voltar para o login</Button>
               ) : (
-                <button className="text-primary underline-offset-4 hover:underline" onClick={() => setMode("forgot")}>Esqueci minha senha</button>
+                <><span>{mode === "login" ? "Ainda não tem uma conta?" : "Já tem uma conta?"}</span><Button variant="link" className="auth-link h-auto p-0" disabled={busy} onClick={() => changeMode(mode === "login" ? "signup" : "login")}>{mode === "login" ? "Comece aqui" : "Entrar"}<ArrowUpRight size={14} aria-hidden /></Button></>
               )}
             </div>
           </>
         )}
       </div>
+      <footer className="auth-main-footer"><span>© {new Date().getFullYear()} Sr. Strix</span><span><LockKeyhole size={12} aria-hidden /> Seu espaço financeiro pessoal</span></footer>
+      </main>
     </div>
   );
 }

@@ -28,3 +28,7 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+- The root URL redirects to the auth route; the auth page owns login, signup, and recovery to keep entry navigation consistent.
+- Auth animations use scoped GSAP effects with reduced-motion support; avoid WebGL for decorative login motion to keep forms lightweight on phones.
+- Preserve legacy browser preference keys during visual rebrands so existing users retain their saved theme.

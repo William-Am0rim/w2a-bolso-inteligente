@@ -11,7 +11,7 @@ import { errMsg, useRefresh, type FinanceData } from "@/lib/data";
 import { useTheme } from "@/lib/prefs";
 
 export const Route = createFileRoute("/_authenticated/configuracoes")({
-  head: () => ({ meta: [{ title: "Configurações — W2A Finanças" }, { name: "description", content: "Perfil e preferências." }] }),
+  head: () => ({ meta: [{ title: "Configurações — Sr. Strix Finanças" }, { name: "description", content: "Perfil e preferências." }, { property: "og:title", content: "Configurações — Sr. Strix Finanças" }, { property: "og:description", content: "Perfil e preferências." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
   component: () => <WithData>{(d) => <Config d={d} />}</WithData>,
 });
 

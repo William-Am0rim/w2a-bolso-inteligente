@@ -16,7 +16,7 @@ const search = z.object({ month: fallback(z.string(), "").default("") });
 
 export const Route = createFileRoute("/_authenticated/dashboard")({
   validateSearch: zodValidator(search),
-  head: () => ({ meta: [{ title: "Dashboard — W2A Finanças" }, { name: "description", content: "Resumo das suas finanças." }] }),
+  head: () => ({ meta: [{ title: "Dashboard — Sr. Strix Finanças" }, { name: "description", content: "Resumo das suas finanças." }, { property: "og:title", content: "Dashboard — Sr. Strix Finanças" }, { property: "og:description", content: "Resumo das suas finanças." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
   component: () => <WithData>{(d) => <Dashboard d={d} />}</WithData>,
 });
 

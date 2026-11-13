@@ -22,7 +22,7 @@ const search = z.object({
 
 export const Route = createFileRoute("/_authenticated/relatorios")({
   validateSearch: zodValidator(search),
-  head: () => ({ meta: [{ title: "Relatórios — W2A Finanças" }, { name: "description", content: "Fluxo de caixa e gastos por competência." }] }),
+  head: () => ({ meta: [{ title: "Relatórios — Sr. Strix Finanças" }, { name: "description", content: "Fluxo de caixa e gastos por competência." }, { property: "og:title", content: "Relatórios — Sr. Strix Finanças" }, { property: "og:description", content: "Fluxo de caixa e gastos por competência." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
   component: () => <WithData>{(d) => <Relatorios d={d} />}</WithData>,
 });
 
@@ -74,7 +74,7 @@ function Relatorios({ d }: { d: FinanceData }) {
     const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
     const a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
-    a.download = `w2a-${isCash ? "fluxo-de-caixa" : "gastos-competencia"}-${from}-a-${to}.csv`;
+    a.download = `sr-strix-${isCash ? "fluxo-de-caixa" : "gastos-competencia"}-${from}-a-${to}.csv`;
     a.click();
     URL.revokeObjectURL(a.href);
   }

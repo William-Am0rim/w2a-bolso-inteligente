@@ -9,10 +9,12 @@ import { Label } from "@/components/ui/label";
 export const Route = createFileRoute("/reset-password")({
   head: () => ({
     meta: [
-      { title: "Redefinir senha — W2A Finanças" },
-      { name: "description", content: "Defina uma nova senha para sua conta W2A Finanças." },
-      { property: "og:title", content: "Redefinir senha — W2A Finanças" },
-      { property: "og:description", content: "Defina uma nova senha para sua conta W2A Finanças." },
+      { title: "Redefinir senha — Sr. Strix Finanças" },
+      { name: "description", content: "Defina uma nova senha para sua conta Sr. Strix Finanças." },
+      { property: "og:title", content: "Redefinir senha — Sr. Strix Finanças" },
+      { property: "og:description", content: "Defina uma nova senha para sua conta Sr. Strix Finanças." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: ResetPassword,

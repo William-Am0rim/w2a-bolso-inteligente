@@ -18,7 +18,7 @@ const search = z.object({ novo: fallback(z.boolean(), false).default(false), arq
 
 export const Route = createFileRoute("/_authenticated/contas")({
   validateSearch: zodValidator(search),
-  head: () => ({ meta: [{ title: "Contas — W2A Finanças" }, { name: "description", content: "Contas bancárias, carteira e transferências." }] }),
+  head: () => ({ meta: [{ title: "Contas — Sr. Strix Finanças" }, { name: "description", content: "Contas bancárias, carteira e transferências." }, { property: "og:title", content: "Contas — Sr. Strix Finanças" }, { property: "og:description", content: "Contas bancárias, carteira e transferências." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
   component: () => <WithData>{(d) => <Contas d={d} />}</WithData>,
 });
 

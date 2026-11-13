@@ -3,7 +3,7 @@ import { Link, Outlet, useNavigate, useRouterState } from "@tanstack/react-route
 import { useQueryClient } from "@tanstack/react-query";
 import {
   LayoutDashboard, ArrowLeftRight, Landmark, CreditCard, PieChart, Target, BarChart3, Tags, Settings,
-  Menu, Plus, LogOut, Moon, Sun, Wallet,
+  Menu, Plus, LogOut, Moon, Sun,
 } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
@@ -12,6 +12,7 @@ import { Sheet, SheetContent, SheetDescription, SheetTitle } from "@/components/
 import { cn } from "@/lib/utils";
 import { useTheme } from "@/lib/prefs";
 import { generateRecurrences, useFinance, useRefresh, type Tx } from "@/lib/data";
+import logoAsset from "@/assets/sr-strix-logo.png.asset.json";
 import { TransactionDialog, type TxDialogInit } from "./TransactionDialog";
 
 const NAV = [
@@ -53,8 +54,7 @@ function NavList({ onNavigate }: { onNavigate?: () => void }) {
 function Brand() {
   return (
     <div className="flex items-center gap-2 px-2 py-1">
-      <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground"><Wallet className="h-5 w-5" aria-hidden /></div>
-      <span className="text-lg font-semibold text-sidebar-accent-foreground">W2A Finanças</span>
+      <img src={logoAsset.url} alt="Sr. Strix Finanças" className="h-20 w-40 object-contain" />
     </div>
   );
 }
@@ -124,7 +124,7 @@ export function AppShell() {
             <Button variant="ghost" size="icon" className="lg:hidden" aria-label="Abrir menu" onClick={() => setMobileOpen(true)}>
               <Menu className="h-5 w-5" />
             </Button>
-            <span className="font-semibold lg:hidden">W2A Finanças</span>
+            <span className="font-semibold lg:hidden">Sr. Strix</span>
             <div className="ml-auto">
               <Button onClick={() => ctx.openTx()}><Plus className="h-4 w-4" aria-hidden /> <span className="hidden sm:inline">Novo lançamento</span><span className="sm:hidden">Novo</span></Button>
             </div>
