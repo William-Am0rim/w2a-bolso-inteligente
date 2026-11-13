@@ -266,5 +266,9 @@
   .auth-main-footer { font-size: 9px; }
 }
 @media (prefers-reduced-motion: reduce) { .strix-auth *, .strix-auth *::before, .strix-auth *::after { animation: none !important; transition: none !important; } }
-.auth-main-header > .auth-wordmark { font-size: 26px; font-weight: 700; letter-spacing: -0.02em; color: var(--auth-ink, currentColor); }
+.auth-main-header > .auth-wordmark { font-family: "Oswald", sans-serif; font-size: 34px; font-weight: 700; line-height: 1; letter-spacing: -0.01em; color: var(--auth-ink, currentColor); }
 .auth-wordmark b { color: var(--auth-brand-light); font-weight: 700; }
+@keyframes strix-spin { to { transform: rotate(360deg); } }
+.strix-orbit { animation: strix-spin 18s linear infinite; }
+.strix-orbit::before { animation: strix-spin 12s linear infinite reverse; }
+.strix-orbit::after { animation: strix-spin 30s linear infinite; }

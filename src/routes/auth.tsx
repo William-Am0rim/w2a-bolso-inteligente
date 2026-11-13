@@ -56,7 +56,6 @@ function AuthPage() {
     media.add("(prefers-reduced-motion: no-preference)", () => {
       const ctx = gsap.context(() => {
         gsap.from(".auth-reveal", { y: 22, opacity: 0, duration: 0.8, stagger: 0.1, ease: "power3.out" });
-        gsap.to(".strix-orbit", { rotation: 360, duration: 18, repeat: -1, ease: "none" });
         gsap.to(".strix-owl", { y: -10, duration: 3, repeat: -1, yoyo: true, ease: "sine.inOut" });
       }, pageRef);
       return () => ctx.revert();
