@@ -11,7 +11,6 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const search = z.object({ redirect: fallback(z.string(), "").default("") });
 
@@ -143,14 +142,6 @@ function AuthPage() {
           </div>
         ) : (
           <>
-            {mode !== "forgot" && (
-              <Tabs value={mode} onValueChange={(v) => changeMode(v === "signup" ? "signup" : "login")} className="mb-7">
-                <TabsList className="auth-tabs grid w-full grid-cols-2">
-                  <TabsTrigger value="login">Entrar</TabsTrigger>
-                  <TabsTrigger value="signup">Criar conta</TabsTrigger>
-                </TabsList>
-              </Tabs>
-            )}
             <form onSubmit={submit} className="space-y-5" noValidate>
               {mode === "signup" && (
                 <div className="space-y-1.5">
@@ -180,7 +171,7 @@ function AuthPage() {
               {mode === "forgot" ? (
                 <Button variant="link" className="auth-link" onClick={() => changeMode("login")} disabled={busy}>Voltar para o login</Button>
               ) : (
-                <><span>{mode === "login" ? "Ainda não tem uma conta?" : "Já tem uma conta?"}</span><Button variant="link" className="auth-link h-auto p-0" disabled={busy} onClick={() => changeMode(mode === "login" ? "signup" : "login")}>{mode === "login" ? "Comece aqui" : "Entrar"}<ArrowUpRight size={14} aria-hidden /></Button></>
+<span>Seu acesso é criado pelo administrador do portal.</span>
               )}
             </div>
           </>

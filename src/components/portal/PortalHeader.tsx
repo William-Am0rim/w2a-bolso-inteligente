@@ -21,8 +21,8 @@ export function PortalHeader({ email, isAdmin }: { email?: string; isAdmin: bool
       </Link>
       <div className="flex items-center gap-2">
         <span className="hidden text-xs text-portal-muted md:inline">{email}</span>
-        <Link to="/portal" className={btn}><LayoutGrid className="h-3.5 w-3.5" aria-hidden /><span className="hidden sm:inline">Sistemas</span></Link>
-        {isAdmin && <Link to="/portal/admin" className={btn}><Shield className="h-3.5 w-3.5" aria-hidden /><span className="hidden sm:inline">Admin</span></Link>}
+        <Link to="/portal" preload="intent" className={btn}><LayoutGrid className="h-3.5 w-3.5" aria-hidden /><span className="hidden sm:inline">Sistemas</span></Link>
+        {isAdmin && <Link to="/portal/admin" preload="intent" className={btn}><Shield className="h-3.5 w-3.5" aria-hidden /><span className="hidden sm:inline">Admin</span></Link>}
         <button onClick={signOut} className={btn}><LogOut className="h-3.5 w-3.5" aria-hidden /><span className="hidden sm:inline">Sair</span></button>
       </div>
     </header>

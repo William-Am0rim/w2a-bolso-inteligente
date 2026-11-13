@@ -92,7 +92,7 @@ export function AppShell() {
 
   const footer = (
     <div className="mt-auto flex flex-col gap-1 border-t border-sidebar-border pt-3">
-      <Link to="/portal" className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-sidebar-foreground hover:bg-sidebar-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sidebar-ring">
+      <Link to="/portal" preload="intent" className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-sidebar-foreground hover:bg-sidebar-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sidebar-ring">
         <LayoutGrid className="h-4 w-4" aria-hidden /> Voltar ao portal
       </Link>
       <button onClick={() => setTheme(theme === "dark" ? "light" : "dark")} className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-sidebar-foreground hover:bg-sidebar-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sidebar-ring">
