@@ -55,7 +55,7 @@ function Portal() {
 
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {data.systems.map((s) => <SystemCard key={s.id} s={s} />)}
-          {data.systems.length === 0 && <p className="text-sm text-portal-muted">Nenhum sistema disponível no momento.</p>}
+          {data.systems.length === 0 && <p className="text-sm text-portal-muted">Seu acesso está aguardando liberação do administrador.</p>}
         </div>
       </main>
     </div>
