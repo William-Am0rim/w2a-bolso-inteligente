@@ -18,10 +18,21 @@ import { Route as AuthenticatedCategoriasRouteImport } from './routes/_authentic
 import { Route as AuthenticatedConfiguracoesRouteImport } from './routes/_authenticated/configuracoes'
 import { Route as AuthenticatedContasRouteImport } from './routes/_authenticated/contas'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedFinanceRouteRouteImport } from './routes/_authenticated/finance/route'
 import { Route as AuthenticatedLancamentosRouteImport } from './routes/_authenticated/lancamentos'
 import { Route as AuthenticatedMetasRouteImport } from './routes/_authenticated/metas'
 import { Route as AuthenticatedOrcamentosRouteImport } from './routes/_authenticated/orcamentos'
 import { Route as AuthenticatedRelatoriosRouteImport } from './routes/_authenticated/relatorios'
+import { Route as AuthenticatedFinanceIndexRouteImport } from './routes/_authenticated/finance/index'
+import { Route as AuthenticatedFinanceAccountsRouteImport } from './routes/_authenticated/finance/accounts'
+import { Route as AuthenticatedFinanceBudgetsRouteImport } from './routes/_authenticated/finance/budgets'
+import { Route as AuthenticatedFinanceCardsRouteImport } from './routes/_authenticated/finance/cards'
+import { Route as AuthenticatedFinanceCategoriesRouteImport } from './routes/_authenticated/finance/categories'
+import { Route as AuthenticatedFinanceDashboardRouteImport } from './routes/_authenticated/finance/dashboard'
+import { Route as AuthenticatedFinanceGoalsRouteImport } from './routes/_authenticated/finance/goals'
+import { Route as AuthenticatedFinanceReportsRouteImport } from './routes/_authenticated/finance/reports'
+import { Route as AuthenticatedFinanceSettingsRouteImport } from './routes/_authenticated/finance/settings'
+import { Route as AuthenticatedFinanceTransactionsRouteImport } from './routes/_authenticated/finance/transactions'
 import { Route as AuthenticatedPortalIndexRouteImport } from './routes/_authenticated/portal.index'
 import { Route as AuthenticatedPortalAdminRouteImport } from './routes/_authenticated/portal.admin'
 
@@ -70,6 +81,12 @@ const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedFinanceRouteRoute =
+  AuthenticatedFinanceRouteRouteImport.update({
+    id: '/finance',
+    path: '/finance',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedLancamentosRoute =
   AuthenticatedLancamentosRouteImport.update({
     id: '/lancamentos',
@@ -91,6 +108,66 @@ const AuthenticatedRelatoriosRoute = AuthenticatedRelatoriosRouteImport.update({
   path: '/relatorios',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedFinanceIndexRoute =
+  AuthenticatedFinanceIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => AuthenticatedFinanceRouteRoute,
+  } as any)
+const AuthenticatedFinanceAccountsRoute =
+  AuthenticatedFinanceAccountsRouteImport.update({
+    id: '/accounts',
+    path: '/accounts',
+    getParentRoute: () => AuthenticatedFinanceRouteRoute,
+  } as any)
+const AuthenticatedFinanceBudgetsRoute =
+  AuthenticatedFinanceBudgetsRouteImport.update({
+    id: '/budgets',
+    path: '/budgets',
+    getParentRoute: () => AuthenticatedFinanceRouteRoute,
+  } as any)
+const AuthenticatedFinanceCardsRoute =
+  AuthenticatedFinanceCardsRouteImport.update({
+    id: '/cards',
+    path: '/cards',
+    getParentRoute: () => AuthenticatedFinanceRouteRoute,
+  } as any)
+const AuthenticatedFinanceCategoriesRoute =
+  AuthenticatedFinanceCategoriesRouteImport.update({
+    id: '/categories',
+    path: '/categories',
+    getParentRoute: () => AuthenticatedFinanceRouteRoute,
+  } as any)
+const AuthenticatedFinanceDashboardRoute =
+  AuthenticatedFinanceDashboardRouteImport.update({
+    id: '/dashboard',
+    path: '/dashboard',
+    getParentRoute: () => AuthenticatedFinanceRouteRoute,
+  } as any)
+const AuthenticatedFinanceGoalsRoute =
+  AuthenticatedFinanceGoalsRouteImport.update({
+    id: '/goals',
+    path: '/goals',
+    getParentRoute: () => AuthenticatedFinanceRouteRoute,
+  } as any)
+const AuthenticatedFinanceReportsRoute =
+  AuthenticatedFinanceReportsRouteImport.update({
+    id: '/reports',
+    path: '/reports',
+    getParentRoute: () => AuthenticatedFinanceRouteRoute,
+  } as any)
+const AuthenticatedFinanceSettingsRoute =
+  AuthenticatedFinanceSettingsRouteImport.update({
+    id: '/settings',
+    path: '/settings',
+    getParentRoute: () => AuthenticatedFinanceRouteRoute,
+  } as any)
+const AuthenticatedFinanceTransactionsRoute =
+  AuthenticatedFinanceTransactionsRouteImport.update({
+    id: '/transactions',
+    path: '/transactions',
+    getParentRoute: () => AuthenticatedFinanceRouteRoute,
+  } as any)
 const AuthenticatedPortalIndexRoute =
   AuthenticatedPortalIndexRouteImport.update({
     id: '/portal/',
@@ -108,6 +185,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/finance': typeof AuthenticatedFinanceRouteRouteWithChildren
   '/cartoes': typeof AuthenticatedCartoesRoute
   '/categorias': typeof AuthenticatedCategoriasRoute
   '/configuracoes': typeof AuthenticatedConfiguracoesRoute
@@ -117,7 +195,17 @@ export interface FileRoutesByFullPath {
   '/metas': typeof AuthenticatedMetasRoute
   '/orcamentos': typeof AuthenticatedOrcamentosRoute
   '/relatorios': typeof AuthenticatedRelatoriosRoute
+  '/finance/accounts': typeof AuthenticatedFinanceAccountsRoute
+  '/finance/budgets': typeof AuthenticatedFinanceBudgetsRoute
+  '/finance/cards': typeof AuthenticatedFinanceCardsRoute
+  '/finance/categories': typeof AuthenticatedFinanceCategoriesRoute
+  '/finance/dashboard': typeof AuthenticatedFinanceDashboardRoute
+  '/finance/goals': typeof AuthenticatedFinanceGoalsRoute
+  '/finance/reports': typeof AuthenticatedFinanceReportsRoute
+  '/finance/settings': typeof AuthenticatedFinanceSettingsRoute
+  '/finance/transactions': typeof AuthenticatedFinanceTransactionsRoute
   '/portal/admin': typeof AuthenticatedPortalAdminRoute
+  '/finance/': typeof AuthenticatedFinanceIndexRoute
   '/portal/': typeof AuthenticatedPortalIndexRoute
 }
 export interface FileRoutesByTo {
@@ -133,7 +221,17 @@ export interface FileRoutesByTo {
   '/metas': typeof AuthenticatedMetasRoute
   '/orcamentos': typeof AuthenticatedOrcamentosRoute
   '/relatorios': typeof AuthenticatedRelatoriosRoute
+  '/finance/accounts': typeof AuthenticatedFinanceAccountsRoute
+  '/finance/budgets': typeof AuthenticatedFinanceBudgetsRoute
+  '/finance/cards': typeof AuthenticatedFinanceCardsRoute
+  '/finance/categories': typeof AuthenticatedFinanceCategoriesRoute
+  '/finance/dashboard': typeof AuthenticatedFinanceDashboardRoute
+  '/finance/goals': typeof AuthenticatedFinanceGoalsRoute
+  '/finance/reports': typeof AuthenticatedFinanceReportsRoute
+  '/finance/settings': typeof AuthenticatedFinanceSettingsRoute
+  '/finance/transactions': typeof AuthenticatedFinanceTransactionsRoute
   '/portal/admin': typeof AuthenticatedPortalAdminRoute
+  '/finance': typeof AuthenticatedFinanceIndexRoute
   '/portal': typeof AuthenticatedPortalIndexRoute
 }
 export interface FileRoutesById {
@@ -142,6 +240,7 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/_authenticated/finance': typeof AuthenticatedFinanceRouteRouteWithChildren
   '/_authenticated/cartoes': typeof AuthenticatedCartoesRoute
   '/_authenticated/categorias': typeof AuthenticatedCategoriasRoute
   '/_authenticated/configuracoes': typeof AuthenticatedConfiguracoesRoute
@@ -151,7 +250,17 @@ export interface FileRoutesById {
   '/_authenticated/metas': typeof AuthenticatedMetasRoute
   '/_authenticated/orcamentos': typeof AuthenticatedOrcamentosRoute
   '/_authenticated/relatorios': typeof AuthenticatedRelatoriosRoute
+  '/_authenticated/finance/accounts': typeof AuthenticatedFinanceAccountsRoute
+  '/_authenticated/finance/budgets': typeof AuthenticatedFinanceBudgetsRoute
+  '/_authenticated/finance/cards': typeof AuthenticatedFinanceCardsRoute
+  '/_authenticated/finance/categories': typeof AuthenticatedFinanceCategoriesRoute
+  '/_authenticated/finance/dashboard': typeof AuthenticatedFinanceDashboardRoute
+  '/_authenticated/finance/goals': typeof AuthenticatedFinanceGoalsRoute
+  '/_authenticated/finance/reports': typeof AuthenticatedFinanceReportsRoute
+  '/_authenticated/finance/settings': typeof AuthenticatedFinanceSettingsRoute
+  '/_authenticated/finance/transactions': typeof AuthenticatedFinanceTransactionsRoute
   '/_authenticated/portal/admin': typeof AuthenticatedPortalAdminRoute
+  '/_authenticated/finance/': typeof AuthenticatedFinanceIndexRoute
   '/_authenticated/portal/': typeof AuthenticatedPortalIndexRoute
 }
 export interface FileRouteTypes {
@@ -160,6 +269,7 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/reset-password'
+    | '/finance'
     | '/cartoes'
     | '/categorias'
     | '/configuracoes'
@@ -169,7 +279,17 @@ export interface FileRouteTypes {
     | '/metas'
     | '/orcamentos'
     | '/relatorios'
+    | '/finance/accounts'
+    | '/finance/budgets'
+    | '/finance/cards'
+    | '/finance/categories'
+    | '/finance/dashboard'
+    | '/finance/goals'
+    | '/finance/reports'
+    | '/finance/settings'
+    | '/finance/transactions'
     | '/portal/admin'
+    | '/finance/'
     | '/portal/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -185,7 +305,17 @@ export interface FileRouteTypes {
     | '/metas'
     | '/orcamentos'
     | '/relatorios'
+    | '/finance/accounts'
+    | '/finance/budgets'
+    | '/finance/cards'
+    | '/finance/categories'
+    | '/finance/dashboard'
+    | '/finance/goals'
+    | '/finance/reports'
+    | '/finance/settings'
+    | '/finance/transactions'
     | '/portal/admin'
+    | '/finance'
     | '/portal'
   id:
     | '__root__'
@@ -193,6 +323,7 @@ export interface FileRouteTypes {
     | '/_authenticated'
     | '/auth'
     | '/reset-password'
+    | '/_authenticated/finance'
     | '/_authenticated/cartoes'
     | '/_authenticated/categorias'
     | '/_authenticated/configuracoes'
@@ -202,7 +333,17 @@ export interface FileRouteTypes {
     | '/_authenticated/metas'
     | '/_authenticated/orcamentos'
     | '/_authenticated/relatorios'
+    | '/_authenticated/finance/accounts'
+    | '/_authenticated/finance/budgets'
+    | '/_authenticated/finance/cards'
+    | '/_authenticated/finance/categories'
+    | '/_authenticated/finance/dashboard'
+    | '/_authenticated/finance/goals'
+    | '/_authenticated/finance/reports'
+    | '/_authenticated/finance/settings'
+    | '/_authenticated/finance/transactions'
     | '/_authenticated/portal/admin'
+    | '/_authenticated/finance/'
     | '/_authenticated/portal/'
   fileRoutesById: FileRoutesById
 }
@@ -278,6 +419,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/finance': {
+      id: '/_authenticated/finance'
+      path: '/finance'
+      fullPath: '/finance'
+      preLoaderRoute: typeof AuthenticatedFinanceRouteRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/lancamentos': {
       id: '/_authenticated/lancamentos'
       path: '/lancamentos'
@@ -306,6 +454,76 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedRelatoriosRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/finance/': {
+      id: '/_authenticated/finance/'
+      path: '/'
+      fullPath: '/finance/'
+      preLoaderRoute: typeof AuthenticatedFinanceIndexRouteImport
+      parentRoute: typeof AuthenticatedFinanceRouteRoute
+    }
+    '/_authenticated/finance/accounts': {
+      id: '/_authenticated/finance/accounts'
+      path: '/accounts'
+      fullPath: '/finance/accounts'
+      preLoaderRoute: typeof AuthenticatedFinanceAccountsRouteImport
+      parentRoute: typeof AuthenticatedFinanceRouteRoute
+    }
+    '/_authenticated/finance/budgets': {
+      id: '/_authenticated/finance/budgets'
+      path: '/budgets'
+      fullPath: '/finance/budgets'
+      preLoaderRoute: typeof AuthenticatedFinanceBudgetsRouteImport
+      parentRoute: typeof AuthenticatedFinanceRouteRoute
+    }
+    '/_authenticated/finance/cards': {
+      id: '/_authenticated/finance/cards'
+      path: '/cards'
+      fullPath: '/finance/cards'
+      preLoaderRoute: typeof AuthenticatedFinanceCardsRouteImport
+      parentRoute: typeof AuthenticatedFinanceRouteRoute
+    }
+    '/_authenticated/finance/categories': {
+      id: '/_authenticated/finance/categories'
+      path: '/categories'
+      fullPath: '/finance/categories'
+      preLoaderRoute: typeof AuthenticatedFinanceCategoriesRouteImport
+      parentRoute: typeof AuthenticatedFinanceRouteRoute
+    }
+    '/_authenticated/finance/dashboard': {
+      id: '/_authenticated/finance/dashboard'
+      path: '/dashboard'
+      fullPath: '/finance/dashboard'
+      preLoaderRoute: typeof AuthenticatedFinanceDashboardRouteImport
+      parentRoute: typeof AuthenticatedFinanceRouteRoute
+    }
+    '/_authenticated/finance/goals': {
+      id: '/_authenticated/finance/goals'
+      path: '/goals'
+      fullPath: '/finance/goals'
+      preLoaderRoute: typeof AuthenticatedFinanceGoalsRouteImport
+      parentRoute: typeof AuthenticatedFinanceRouteRoute
+    }
+    '/_authenticated/finance/reports': {
+      id: '/_authenticated/finance/reports'
+      path: '/reports'
+      fullPath: '/finance/reports'
+      preLoaderRoute: typeof AuthenticatedFinanceReportsRouteImport
+      parentRoute: typeof AuthenticatedFinanceRouteRoute
+    }
+    '/_authenticated/finance/settings': {
+      id: '/_authenticated/finance/settings'
+      path: '/settings'
+      fullPath: '/finance/settings'
+      preLoaderRoute: typeof AuthenticatedFinanceSettingsRouteImport
+      parentRoute: typeof AuthenticatedFinanceRouteRoute
+    }
+    '/_authenticated/finance/transactions': {
+      id: '/_authenticated/finance/transactions'
+      path: '/transactions'
+      fullPath: '/finance/transactions'
+      preLoaderRoute: typeof AuthenticatedFinanceTransactionsRouteImport
+      parentRoute: typeof AuthenticatedFinanceRouteRoute
+    }
     '/_authenticated/portal/': {
       id: '/_authenticated/portal/'
       path: '/portal'
@@ -323,7 +541,41 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface AuthenticatedFinanceRouteRouteChildren {
+  AuthenticatedFinanceAccountsRoute: typeof AuthenticatedFinanceAccountsRoute
+  AuthenticatedFinanceBudgetsRoute: typeof AuthenticatedFinanceBudgetsRoute
+  AuthenticatedFinanceCardsRoute: typeof AuthenticatedFinanceCardsRoute
+  AuthenticatedFinanceCategoriesRoute: typeof AuthenticatedFinanceCategoriesRoute
+  AuthenticatedFinanceDashboardRoute: typeof AuthenticatedFinanceDashboardRoute
+  AuthenticatedFinanceGoalsRoute: typeof AuthenticatedFinanceGoalsRoute
+  AuthenticatedFinanceReportsRoute: typeof AuthenticatedFinanceReportsRoute
+  AuthenticatedFinanceSettingsRoute: typeof AuthenticatedFinanceSettingsRoute
+  AuthenticatedFinanceTransactionsRoute: typeof AuthenticatedFinanceTransactionsRoute
+  AuthenticatedFinanceIndexRoute: typeof AuthenticatedFinanceIndexRoute
+}
+
+const AuthenticatedFinanceRouteRouteChildren: AuthenticatedFinanceRouteRouteChildren =
+  {
+    AuthenticatedFinanceAccountsRoute: AuthenticatedFinanceAccountsRoute,
+    AuthenticatedFinanceBudgetsRoute: AuthenticatedFinanceBudgetsRoute,
+    AuthenticatedFinanceCardsRoute: AuthenticatedFinanceCardsRoute,
+    AuthenticatedFinanceCategoriesRoute: AuthenticatedFinanceCategoriesRoute,
+    AuthenticatedFinanceDashboardRoute: AuthenticatedFinanceDashboardRoute,
+    AuthenticatedFinanceGoalsRoute: AuthenticatedFinanceGoalsRoute,
+    AuthenticatedFinanceReportsRoute: AuthenticatedFinanceReportsRoute,
+    AuthenticatedFinanceSettingsRoute: AuthenticatedFinanceSettingsRoute,
+    AuthenticatedFinanceTransactionsRoute:
+      AuthenticatedFinanceTransactionsRoute,
+    AuthenticatedFinanceIndexRoute: AuthenticatedFinanceIndexRoute,
+  }
+
+const AuthenticatedFinanceRouteRouteWithChildren =
+  AuthenticatedFinanceRouteRoute._addFileChildren(
+    AuthenticatedFinanceRouteRouteChildren,
+  )
+
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedFinanceRouteRoute: typeof AuthenticatedFinanceRouteRouteWithChildren
   AuthenticatedCartoesRoute: typeof AuthenticatedCartoesRoute
   AuthenticatedCategoriasRoute: typeof AuthenticatedCategoriasRoute
   AuthenticatedConfiguracoesRoute: typeof AuthenticatedConfiguracoesRoute
@@ -338,6 +590,7 @@ interface AuthenticatedRouteRouteChildren {
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedFinanceRouteRoute: AuthenticatedFinanceRouteRouteWithChildren,
   AuthenticatedCartoesRoute: AuthenticatedCartoesRoute,
   AuthenticatedCategoriasRoute: AuthenticatedCategoriasRoute,
   AuthenticatedConfiguracoesRoute: AuthenticatedConfiguracoesRoute,

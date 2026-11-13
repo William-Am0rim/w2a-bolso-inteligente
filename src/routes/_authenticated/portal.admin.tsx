@@ -359,7 +359,7 @@ function SystemForm({ system, nextOrder, onDone }: { system: System | null; next
       <div><label htmlFor="s-name" className="text-xs text-portal-muted">Nome</label><input id="s-name" className={input} value={name} onChange={(e) => setName(e.target.value)} maxLength={60} />{err("name")}</div>
       <div><label htmlFor="s-slug" className="text-xs text-portal-muted">Identificador</label><input id="s-slug" className={input} value={slug} disabled={system?.slug === "financas"} onChange={(e) => setSlug(e.target.value.toLowerCase())} placeholder="ex.: crm" />{err("slug")}</div>
       <div><label htmlFor="s-desc" className="text-xs text-portal-muted">Descrição</label><textarea id="s-desc" rows={3} className={input} value={description} onChange={(e) => setDescription(e.target.value)} maxLength={200} /></div>
-      <div><label htmlFor="s-path" className="text-xs text-portal-muted">Endereço de entrada</label><input id="s-path" className={input} value={path} onChange={(e) => setPath(e.target.value)} placeholder="/dashboard" />{err("path")}</div>
+      <div><label htmlFor="s-path" className="text-xs text-portal-muted">Endereço de entrada</label><input id="s-path" className={input} value={path} onChange={(e) => setPath(e.target.value)} placeholder="/finance/dashboard" />{err("path")}</div>
       <div className="flex justify-end gap-2 pt-2">
         <button type="button" onClick={onDone} className="rounded-full px-4 py-2 text-sm text-portal-muted hover:text-portal-fg">Cancelar</button>
         <button type="submit" className={primary} disabled={busy}>{busy ? "Salvando..." : "Salvar"}</button>

@@ -102,6 +102,6 @@ function SystemCard({ s }: { s: PortalSystem }) {
   );
 
   return s.granted
-    ? <Link to={s.path as "/dashboard"} preload="intent" className="block rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-portal-accent" aria-label={`Abrir ${s.name}`}>{body}</Link>
+    ? <Link to={s.path as "/finance/dashboard"} preload="intent" className="block rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-portal-accent" aria-label={`Abrir ${s.name}`}>{body}</Link>
     : <div aria-disabled className="cursor-not-allowed opacity-80">{body}</div>;
 }

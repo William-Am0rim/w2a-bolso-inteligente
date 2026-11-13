@@ -33,6 +33,7 @@ use the editor.
 - Auth animations use scoped GSAP effects with reduced-motion support; avoid WebGL for decorative login motion to keep forms lightweight on phones.
 - The portal (/portal) is the signed-in home: systems and per-user access live in the database, the protected layout redirects users without access to a system back to the portal, and admin checks use the database role function, never client state.
 - Accounts are created only by portal admins through server functions that check has_role and then use the service-role client; the auth page has no public sign-up.
-- The protected layout reads the session locally and caches the system-access check in the query cache, to avoid network round-trips on every navigation.
+- Each portal system is a module under src/routes/_authenticated/<module>/ (URL /<module>/*, English page slugs) whose route.tsx calls requireModuleAccess with its system slug and renders the module shell; the shared protected layout only checks the session. Why: modules stay isolated and access is cached per module.
+- Old top-level finance URLs are kept as redirect-only routes so existing bookmarks keep working.
 - Three.js is loaded only via dynamic import inside effects (ParticleField) so SSR never evaluates it.
 - Preserve legacy browser preference keys during visual rebrands so existing users retain their saved theme.

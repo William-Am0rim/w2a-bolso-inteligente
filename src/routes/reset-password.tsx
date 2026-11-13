@@ -36,7 +36,7 @@ function ResetPassword() {
     setBusy(false);
     if (error) return toast.error(error.message);
     toast.success("Senha atualizada.");
-    navigate({ to: "/dashboard" });
+    navigate({ to: "/finance/dashboard" });
   }
   return (
     <div className="flex min-h-screen items-center justify-center bg-background p-4">

@@ -16,15 +16,15 @@ import logoAsset from "@/assets/sr-strix-logo.png.asset.json";
 import { TransactionDialog, type TxDialogInit } from "./TransactionDialog";
 
 const NAV = [
-  { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
-  { to: "/lancamentos", label: "Lançamentos", icon: ArrowLeftRight },
-  { to: "/contas", label: "Contas", icon: Landmark },
-  { to: "/cartoes", label: "Cartões", icon: CreditCard },
-  { to: "/orcamentos", label: "Orçamentos", icon: PieChart },
-  { to: "/metas", label: "Metas", icon: Target },
-  { to: "/relatorios", label: "Relatórios", icon: BarChart3 },
-  { to: "/categorias", label: "Categorias", icon: Tags },
-  { to: "/configuracoes", label: "Configurações", icon: Settings },
+  { to: "/finance/dashboard", label: "Dashboard", icon: LayoutDashboard },
+  { to: "/finance/transactions", label: "Lançamentos", icon: ArrowLeftRight },
+  { to: "/finance/accounts", label: "Contas", icon: Landmark },
+  { to: "/finance/cards", label: "Cartões", icon: CreditCard },
+  { to: "/finance/budgets", label: "Orçamentos", icon: PieChart },
+  { to: "/finance/goals", label: "Metas", icon: Target },
+  { to: "/finance/reports", label: "Relatórios", icon: BarChart3 },
+  { to: "/finance/categories", label: "Categorias", icon: Tags },
+  { to: "/finance/settings", label: "Configurações", icon: Settings },
 ] as const;
 
 const TxCtx = createContext<{ openTx: (init?: TxDialogInit) => void; editTx: (tx: Tx) => void }>({ openTx: () => {}, editTx: () => {} });
