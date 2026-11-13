@@ -33,10 +33,10 @@ export const Route = createFileRoute("/auth")({
 function safePath(p: string) {
   try {
     const u = new URL(p, window.location.origin);
-    if (u.origin !== window.location.origin || u.pathname.startsWith("/auth")) return "/dashboard";
+    if (u.origin !== window.location.origin || u.pathname.startsWith("/auth")) return "/portal";
     return u.pathname + u.search;
   } catch {
-    return "/dashboard";
+    return "/portal";
   }
 }
 
@@ -88,15 +88,15 @@ function AuthPage() {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
         toast.success("Bem-vindo de volta!");
-        navigate({ to: safePath(redirect || "/dashboard") as "/dashboard" });
+        navigate({ to: safePath(redirect || "/portal") as "/portal" });
       } else if (mode === "signup") {
         const { data, error } = await supabase.auth.signUp({
           email,
           password,
-          options: { emailRedirectTo: window.location.origin + "/dashboard", data: { display_name: name.trim() } },
+          options: { emailRedirectTo: window.location.origin + "/portal", data: { display_name: name.trim() } },
         });
         if (error) throw error;
-        if (data.session) navigate({ to: "/dashboard" });
+        if (data.session) navigate({ to: "/portal" });
         else setSent("Enviamos um link de confirmação para o seu e-mail. Confirme para entrar.");
       } else {
         const { error } = await supabase.auth.resetPasswordForEmail(email, {

@@ -15,6 +15,13 @@
       "when": 1794491198356,
       "tag": "0001_migration",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1794599997836,
+      "tag": "0002_portal_access",
+      "breakpoints": true
     }
   ]
 }

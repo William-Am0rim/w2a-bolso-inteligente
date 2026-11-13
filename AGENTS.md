@@ -31,4 +31,6 @@ use the editor.
 
 - The root URL redirects to the auth route; the auth page owns login, signup, and recovery to keep entry navigation consistent.
 - Auth animations use scoped GSAP effects with reduced-motion support; avoid WebGL for decorative login motion to keep forms lightweight on phones.
+- The portal (/portal) is the signed-in home: systems and per-user access live in the database, the protected layout redirects users without access to a system back to the portal, and admin checks use the database role function, never client state.
+- Three.js is loaded only via dynamic import inside effects (ParticleField) so SSR never evaluates it.
 - Preserve legacy browser preference keys during visual rebrands so existing users retain their saved theme.

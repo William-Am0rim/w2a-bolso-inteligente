@@ -436,6 +436,39 @@ export type Database = {
           },
         ]
       }
+      portal_systems: {
+        Row: {
+          active: boolean
+          created_at: string
+          description: string
+          id: string
+          name: string
+          path: string
+          slug: string
+          sort_order: number
+        }
+        Insert: {
+          active?: boolean
+          created_at?: string
+          description?: string
+          id?: string
+          name: string
+          path: string
+          slug: string
+          sort_order?: number
+        }
+        Update: {
+          active?: boolean
+          created_at?: string
+          description?: string
+          id?: string
+          name?: string
+          path?: string
+          slug?: string
+          sort_order?: number
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           created_at: string
@@ -684,6 +717,53 @@ export type Database = {
           },
         ]
       }
+      user_roles: {
+        Row: {
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
+      user_system_access: {
+        Row: {
+          granted_at: string
+          granted_by: string | null
+          system_id: string
+          user_id: string
+        }
+        Insert: {
+          granted_at?: string
+          granted_by?: string | null
+          system_id: string
+          user_id: string
+        }
+        Update: {
+          granted_at?: string
+          granted_by?: string | null
+          system_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_system_access_system_id_fkey"
+            columns: ["system_id"]
+            isOneToOne: false
+            referencedRelation: "portal_systems"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       account_balances: {
@@ -706,6 +786,21 @@ export type Database = {
       }
     }
     Functions: {
+      admin_list_users: {
+        Args: never
+        Returns: {
+          created_at: string
+          display_name: string
+          email: string
+          id: string
+          is_admin: boolean
+          system_ids: string[]
+        }[]
+      }
+      admin_set_access: {
+        Args: { p_granted: boolean; p_system: string; p_user: string }
+        Returns: undefined
+      }
       clamp_day: { Args: { p_day: number; p_month: string }; Returns: string }
       create_card_purchase: {
         Args: {
@@ -726,6 +821,14 @@ export type Database = {
         Args: { p_card: string; p_closing_month: string }
         Returns: string
       }
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
+      has_system_access: { Args: { p_slug: string }; Returns: boolean }
       invoice_dates: {
         Args: {
           p_closing_day: number
@@ -757,7 +860,7 @@ export type Database = {
       today_br: { Args: never; Returns: string }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "user"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -884,6 +987,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "user"],
+    },
   },
 } as const

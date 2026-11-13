@@ -71,6 +71,12 @@
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
   --color-sidebar: var(--sidebar);
+  --color-portal-bg: var(--portal-bg);
+  --color-portal-card: var(--portal-card);
+  --color-portal-line: var(--portal-line);
+  --color-portal-fg: var(--portal-fg);
+  --color-portal-muted: var(--portal-muted);
+  --color-portal-accent: var(--portal-accent);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar-primary: var(--sidebar-primary);
   --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
@@ -81,6 +87,12 @@
 }
 
 :root {
+  --portal-bg: #07070c;
+  --portal-card: rgb(255 255 255 / 0.03);
+  --portal-line: rgb(255 255 255 / 0.09);
+  --portal-fg: #f5f3ff;
+  --portal-muted: #9ca3af;
+  --portal-accent: #8b5cf6;
   --radius: 0.75rem;
   --background: oklch(0.984 0.003 247.858);
   --foreground: oklch(0.21 0.032 264.665);

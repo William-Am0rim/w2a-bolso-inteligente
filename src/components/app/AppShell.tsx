@@ -3,7 +3,7 @@ import { Link, Outlet, useNavigate, useRouterState } from "@tanstack/react-route
 import { useQueryClient } from "@tanstack/react-query";
 import {
   LayoutDashboard, ArrowLeftRight, Landmark, CreditCard, PieChart, Target, BarChart3, Tags, Settings,
-  Menu, Plus, LogOut, Moon, Sun,
+  Menu, Plus, LogOut, Moon, Sun, LayoutGrid,
 } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
@@ -92,6 +92,9 @@ export function AppShell() {
 
   const footer = (
     <div className="mt-auto flex flex-col gap-1 border-t border-sidebar-border pt-3">
+      <Link to="/portal" className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-sidebar-foreground hover:bg-sidebar-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sidebar-ring">
+        <LayoutGrid className="h-4 w-4" aria-hidden /> Voltar ao portal
+      </Link>
       <button onClick={() => setTheme(theme === "dark" ? "light" : "dark")} className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-sidebar-foreground hover:bg-sidebar-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sidebar-ring">
         {theme === "dark" ? <Sun className="h-4 w-4" aria-hidden /> : <Moon className="h-4 w-4" aria-hidden />}
         {theme === "dark" ? "Tema claro" : "Tema escuro"}
